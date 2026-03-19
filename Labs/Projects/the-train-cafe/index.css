@@ -10,6 +10,25 @@ body {
     line-height: 1.6;
 }
 
+/* Responsive Grid for Destinations */
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap; /* This is the secret for mobile stacking! */
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .destination-card {
+    flex: 1 1 300px; /* Tells cards to be 300px wide, then drop down */
+    max-width: 100%;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2.5rem; /* Makes the title fit on small screens */
+    }
+  }
+
 /* Header */
 .main-header {
     position: sticky;       /* This "sticks" the header */
