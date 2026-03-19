@@ -11,24 +11,28 @@ body {
     line-height: 1.6;
 }
 
-/* Responsive Grid for Destinations */
+/* This makes the container flexible */
 .menu-grid {
     display: flex;
-    flex-wrap: wrap; /* This is the secret for mobile stacking! */
-    gap: 20px;
+    flex-wrap: wrap; /* This allows items to move to the next line! */
     justify-content: center;
-  }
-  
-  .destination-card {
-    flex: 1 1 300px; /* Tells cards to be 300px wide, then drop down */
+    gap: 20px;
+}
+
+/* This makes each card resize for mobile */
+.destination-card {
+    flex: 1 1 300px; /* Base size is 300px, but it will grow/shrink */
     max-width: 100%;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .hero-section h1 {
-      font-size: 2.5rem; /* Makes the title fit on small screens */
+    text-align: center;
+}
+
+/* Extra mobile-specific polish */
+@media screen and (max-width: 600px) {
+    .menu-grid {
+        flex-direction: column; /* Forces them to stack vertically */
+        align-items: center;
     }
-  }
+}
 
 /* Header */
 .main-header {
