@@ -17,6 +17,8 @@
                     <a href="#menu-section" class="nav-link">Menu</a>
                     <a href="#">Reservation</a>
                     <a href="#">Order Online</a>
+                    <!-- Add this inside your <nav> or <header> -->
+<button class="nav-login-btn" onclick="openAuth()">Passenger Login</button>
                 </nav>
             </div>
             <div class="lang-selector">
@@ -39,19 +41,19 @@
             <h3 class="category-title">Destinations (Main Dishes)</h3>
             <div class="grid grid-3">
                 <div class="card">
-                    <img src="images/paris.jpg" alt="Paris">
+                    <img src="images/Croissant.jpg" alt="Paris">
                     <h4>Paris: Morning Croissant Plate</h4>
                     <p>Light, elegant, a slow morning in Paris.</p>
                     <span class="price">$14.00</span>
                 </div>
                 <div class="card">
-                    <img src="images/tokyo.jpg" alt="Tokyo">
+                    <img src="images/Ramen1.jpg" alt="Tokyo">
                     <h4>Tokyo</h4>
                     <p>Description of unique product or dish.</p>
                     <span class="price">$18.50</span>
                 </div>
                 <div class="card">
-                    <img src="images/istanbul.jpg" alt="Istanbul">
+                    <img src="images/Meze.jpg" alt="Istanbul">
                     <h4>Istanbul</h4>
                     <p>Mediterranean spices and flavors.</p>
                     <span class="price">$16.00</span>
@@ -61,12 +63,12 @@
             <h3 class="category-title">Sweet Stops (Desserts)</h3>
             <div class="grid grid-2">
                 <div class="card">
-                    <img src="images/caramel-flan.jpg" alt="Flan">
+                    <img src="images/Flan.jpg" alt="Flan">
                     <h4>Velvet Caramel Flan</h4>
                     <p>Silky texture with rich amber glaze.</p>
                 </div>
                 <div class="card">
-                    <img src="images/chocolate-dream.jpg" alt="Chocolate">
+                    <img src="images/Vienna Cake.jpg" alt="Chocolate">
                     <h4>Volcano Chocolate Dream</h4>
                     <p>Warm molten core with vanilla cream.</p>
                 </div>
@@ -75,12 +77,12 @@
             <h3 class="category-title">Drinks</h3>
             <div class="grid grid-2">
                 <div class="card">
-                    <img src="images/espresso.jpg" alt="Espresso">
+                    <img src="images/Espresso.jpg" alt="Espresso">
                     <h4>Espresso Express</h4>
                     <p>Bold fuel for your next stop.</p>
                 </div>
                 <div class="card">
-                    <img src="images/matcha.jpg" alt="Matcha">
+                    <img src="images/Matcha.jpg" alt="Matcha">
                     <h4>Matcha Departure</h4>
                     <p>Earthy and calming green tea.</p>
                 </div>
@@ -150,6 +152,38 @@
             </div>
         </div>
     </footer>
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAuth()">&times;</span>
+    
+            
+    <div id="loginSection">
+                <img src="images/Logo.jpg" alt="The Train Café Logo" class="auth-logo">
+                <h2>Passenger Login</h2>
+                <form id="loginForm">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit" class="auth-btn">Sign In</button>
+                </form>
+                <p>New Traveler? <a href="#" onclick="showSignUp()">Create Account</a></p>
+            </div>
+    
+            
+    <div id="signupSection" style="display:none;">
+                <img src="images/Logo.jpg" alt="The Train Café Logo" class="auth-logo">
+                <h2>Join the Journey</h2>
+                <form id="signupForm">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Create Password" required>
+                    <button type="submit" class="auth-btn">Register</button>
+                </form>
+                <p>Already have an account? <a href="#" onclick="showLogin()">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
 
 </body>
 </html>
