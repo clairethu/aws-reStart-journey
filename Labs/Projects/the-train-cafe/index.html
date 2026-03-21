@@ -4,186 +4,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Train Café | A Café Between Destinations</title>
+    <meta name="description" content="The Train Café — a vintage railway café in Zurich. Book a table, order online, and experience a journey through flavors from Paris, Tokyo, Istanbul and beyond.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
+    <!-- ── SIGN-IN MODAL (Cognito) ── -->
+    <div class="modal-overlay" id="signinModal" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
+            <p class="modal-logo">The Train Café</p>
+            <h2 class="modal-title">Welcome back</h2>
+            <p class="modal-sub">Manage your bookings and orders.</p>
+            <div class="cognito-label"><span class="cognito-dot"></span>Secured by AWS Cognito</div>
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="switchTab('login',this)">Sign In</button>
+                <button class="modal-tab" onclick="switchTab('register',this)">Create Account</button>
+            </div>
+            <div id="auth-login" class="auth-panel active">
+                <div class="modal-form">
+                    <div class="form-group"><label>Email Address</label><input type="email" id="login-email" placeholder="anna@example.com"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="login-password" placeholder="••••••••"></div>
+                    <a href="#" class="forgot-link">Forgot your password?</a>
+                    <button class="modal-submit" onclick="handleSignIn()">Sign In</button>
+                </div>
+            </div>
+            <div id="auth-register" class="auth-panel">
+                <div class="modal-form">
+                    <div class="form-group"><label>Full Name</label><input type="text" id="reg-name" placeholder="Anna Müller"></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" id="reg-email" placeholder="anna@example.com"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="Min. 8 characters"></div>
+                    <button class="modal-submit" onclick="handleRegister()">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <header class="main-header">
         <div class="nav-container">
             <div class="nav-left">
-                <img src="images/Logo.jpg" alt="Logo" class="mini-logo">
+                <img src="images/Logo.jpg" alt="The Train Café" class="mini-logo">
                 <nav class="nav-links">
-                    <a href="#about-section" class="nav-link">About Us</a>
-                    <a href="#menu-section" class="nav-link">Menu</a>
-                    <a href="#">Reservation</a>
-                    <a href="#">Order Online</a>
-                    <!-- Add this inside your <nav> or <header> -->
-<button class="nav-login-btn" onclick="openAuth()">Passenger Login</button>
+                    <a href="#about-section">About Us</a>
+                    <a href="#menu-section">Menu</a>
+                    <a href="booking.html">Reservation</a>
+                    <a href="order.html">Order Online</a>
                 </nav>
             </div>
-            <div class="lang-selector">
-                <button>EN <span>⌄</span></button>
+            <div class="nav-right">
+                <a href="booking.html" class="btn-reserve">Reserve a Table</a>
+                <button class="btn-signin" onclick="openModal()">Sign In</button>
+                <div class="lang-selector"><button>EN <span>&#8964;</span></button></div>
             </div>
         </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-overlay">
-            <h1>The Train Café</h1>
-            <p>A café between destinations</p>
-        </div>
-    </section>
+    <section class="hero-section" role="banner" aria-label="The Train Café"></section>
+
+
 
     <main class="container">
+
         <section id="menu-section" class="menu">
             <h2 class="section-title">Menu</h2>
-            
-            <h3 class="category-title">Destinations (Main Dishes)</h3>
+
+            <h3 class="category-title">Destinations — Main Dishes</h3>
             <div class="grid grid-3">
                 <div class="card">
-                    <img src="images/Croissant.jpg" alt="Paris">
-                    <h4>Paris: Morning Croissant Plate</h4>
-                    <p>Light, elegant, a slow morning in Paris.</p>
+                    <img src="images/Croissant.jpg" alt="Paris Morning Croissant Plate">
+                    <h4>Paris Morning Croissant Plate</h4>
+                    <p>Buttery croissant, scrambled eggs, smoked salmon, fresh greens.</p>
                     <span class="price">$14.00</span>
                 </div>
                 <div class="card">
-                    <img src="images/Ramen1.jpg" alt="Tokyo">
-                    <h4>Tokyo</h4>
-                    <p>Description of unique product or dish.</p>
+                    <img src="images/Ramen.jpg" alt="Tokyo Night Ramen">
+                    <h4>Tokyo Night Ramen</h4>
+                    <p>Rich broth, noodles, soft egg, marinated pork.</p>
                     <span class="price">$18.50</span>
                 </div>
                 <div class="card">
-                    <img src="images/Meze.jpg" alt="Istanbul">
-                    <h4>Istanbul</h4>
-                    <p>Mediterranean spices and flavors.</p>
+                    <img src="images/Meze.jpg" alt="Istanbul Sunset Mezze">
+                    <h4>Istanbul Sunset Mezze</h4>
+                    <p>Hummus, grilled vegetables, warm flatbread.</p>
                     <span class="price">$16.00</span>
                 </div>
             </div>
 
-            <h3 class="category-title">Sweet Stops (Desserts)</h3>
+            <h3 class="category-title">Sweet Stops — Desserts</h3>
             <div class="grid grid-2">
                 <div class="card">
-                    <img src="images/Flan.jpg" alt="Flan">
-                    <h4>Velvet Caramel Flan</h4>
-                    <p>Silky texture with rich amber glaze.</p>
+                    <img src="images/Flan.jpg" alt="Lisbon Caramel Flan">
+                    <h4>Lisbon Caramel Flan</h4>
+                    <p>Silky custard with golden caramel.</p>
+                    <span class="price">$9.00</span>
                 </div>
                 <div class="card">
-                    <img src="images/Vienna Cake.jpg" alt="Chocolate">
-                    <h4>Volcano Chocolate Dream</h4>
+                    <img src="images/Vienna%20Cake.jpg" alt="Vienna Chocolate Dream">
+                    <h4>Vienna Chocolate Dream</h4>
                     <p>Warm molten core with vanilla cream.</p>
+                    <span class="price">$10.00</span>
                 </div>
             </div>
 
             <h3 class="category-title">Drinks</h3>
             <div class="grid grid-2">
                 <div class="card">
-                    <img src="images/Espresso.jpg" alt="Espresso">
+                    <img src="images/Espresso.jpg" alt="Espresso Express">
                     <h4>Espresso Express</h4>
-                    <p>Bold fuel for your next stop.</p>
+                    <p>Strong Italian espresso. Bold fuel for your next stop.</p>
+                    <span class="price">$4.00</span>
                 </div>
                 <div class="card">
-                    <img src="images/Matcha.jpg" alt="Matcha">
+                    <img src="images/Matcha.jpg" alt="Matcha Departure">
                     <h4>Matcha Departure</h4>
-                    <p>Earthy and calming green tea.</p>
+                    <p>Smooth matcha latte. Earthy and calming.</p>
+                    <span class="price">$5.50</span>
                 </div>
+            </div>
+
+            <div class="menu-cta">
+                <a href="order.html" class="btn-cta">Order Now — All Aboard</a>
             </div>
         </section>
 
         <section id="about-section" class="about-us">
             <h2 class="section-title">About Us</h2>
             <div class="about-flex">
-                <img src="images/Logo.jpg" alt="About Logo" class="about-img">
+                <img src="images/Logo.jpg" alt="The Train Café Logo" class="about-img">
                 <div class="about-text">
-                    <p>Welcome to The Train Café — a place that exists between destinations.</p>
-                    <p>Inspired by old railway stations and forgotten journeys, our café is designed for travelers. Whether you're starting your day or ending it, we have a seat for you.</p>
-                    <p>They say if you stay long enough, you might hear the whistle blow. Will you catch it?</p>
+                    <p>Welcome to <em>The Train Café</em> — a place that exists between destinations.</p>
+                    <p>Inspired by old railway stations and forgotten journeys, our café is designed like a timeless train platform where every guest is a traveler. Some come to rest, some to remember, and some… to begin again.</p>
+                    <p>They say if you stay long enough, you might hear a train that doesn't appear on any schedule. Will you catch it?</p>
+                    <a href="booking.html" class="btn-cta" style="margin-top: 28px; display: inline-block;">Book Your Seat</a>
                 </div>
             </div>
         </section>
+
     </main>
 
-   <!-- <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Follow us on Social Media</h4>
-                <p>  <img src="images/socials.png" alt="TripAdvisor" class="ta-logo"> </p>  
-                    <p><img src="images/tripadvisor.png" alt="TripAdvisor" class="ta-logo"></p>
-                  
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <p>The Train Café<br>Bahnhofstrasse 10<br>8001 Zurich<br>Tel. +41 44 123 45 67</p>
-            </div>
-            <div class="footer-col">
-                <h4>Opening Hours:</h4>
-                <p>Mon-Sat: 11:00 - 22:30<br>Sun: 11:00 - 18:00</p>
-            </div>
-            <div class="footer-col">
-                <h4>Subscribe to our newsletter</h4>
-                        <input type="email" placeholder="Your email address">
+    <!-- ── REVIEWS ── -->
+    <section class="reviews-strip">
+        <div class="reviews-inner">
+            <h2 class="section-title">What Guests Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"An extraordinary experience. The Tokyo Night Ramen transported me halfway across the world. The atmosphere is unlike anything else in Zurich."</p>
+                    <p class="review-author">— Maria K., TripAdvisor</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Booked online in two minutes, the table was perfectly set when we arrived. The Vienna Chocolate Dream is non-negotiable. We will be back."</p>
+                    <p class="review-author">— Thomas R., Google</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                    <p class="review-text">"The Paris Croissant Plate for brunch was sublime. The décor — all vintage rail maps and warm lanterns — is something else entirely."</p>
+                    <p class="review-author">— Lena S., TripAdvisor</p>
+                </div>
             </div>
         </div>
-    </footer> -->
+    </section>
+
+    <section class="map-section">
+        <div class="map-inner">
+            <div class="map-text">
+                <p class="section-eyebrow">Find Us</p>
+                <h2 class="map-title">Visit The Train Café</h2>
+                <p class="map-address">Bahnhofstrasse 10, 8001 Zurich</p>
+                <p class="map-hours">Mon–Sat: 11:00 – 22:30 &nbsp;·&nbsp; Sun: 11:00 – 18:00</p>
+                <a href="https://maps.google.com/?q=Bahnhofstrasse+10+Zurich" target="_blank" class="btn-cta" style="display:inline-block; margin-top:1.5rem;">Get Directions</a>
+            </div>
+            <div class="map-image-wrap">
+                <img src="images/Map.png" alt="The Train Café location in Zurich" class="map-img">
+            </div>
+        </div>
+    </section>
 
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-col">
-                <h4>Follow us on Social Media</h4>
-               
-                <p> <img src="images/socials.png" alt="TripAdvisor" class="ta-logo"> </p>
-                <p> <img src="images/tripadvisor.png" alt="TripAdvisor" class="ta-logo"> </p>
-         
-                <h4 class="footer-heading newsletter-title">Subscribe to our newsletter</h4>
-                <input type="email" placeholder="Your email address" class="email-input">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                        Instagram
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        Facebook
+                    </a>
+                    <a href="#" class="social-icon" aria-label="TripAdvisor">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="13" r="3"/><circle cx="17" cy="13" r="3"/><path d="M12 4C8 4 4.5 6 3 9h18c-1.5-3-5-5-9-5z"/><circle cx="7" cy="13" r="1.2" fill="#1a1209"/><circle cx="17" cy="13" r="1.2" fill="#1a1209"/></svg>
+                        TripAdvisor
+                    </a>
+                </div>
+                <h4 class="footer-heading newsletter-title">Newsletter</h4>
+                <input type="email" placeholder="Your email address" class="email-input" aria-label="Newsletter email">
             </div>
-    
             <div class="footer-col">
                 <h4 class="footer-heading">Contact</h4>
                 <p>The Train Café</p>
                 <p>Bahnhofstrasse 10</p>
                 <p>8001 Zurich</p>
                 <p>Tel. +41 44 123 45 67</p>
+                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba2a5ada48bbfa3aebfb9aaa2a5a8aaadaee5a8a3">[email&#160;protected]</a></p>
             </div>
-    
-            <div class="footer-col no-border">
-                <h4 class="footer-heading">Opening Hours:</h4>
-                <p>Mon-Sat: 11:00 - 22:30</p>
-                <p>Sun: 11:00 - 18:00</p>
+            <div class="footer-col">
+                <h4 class="footer-heading">Opening Hours</h4>
+                <p>Mon–Sat: 11:00 – 22:30</p>
+                <p>Sun: 11:00 – 18:00</p>
+                <div class="footer-links">
+                    <a href="booking.html">Reserve a Table</a>
+                    <a href="order.html">Order Online</a>
+                    <a href="#" onclick="openModal();return false;">Sign In / My Account</a>
+                </div>
             </div>
         </div>
+        <div class="footer-bottom">&copy; 2024 The Train Café, Zurich &nbsp;·&nbsp; All rights reserved</div>
     </footer>
-    <div id="authModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeAuth()">&times;</span>
-    
-            
-    <div id="loginSection">
-                <img src="images/Logo.jpg" alt="The Train Café Logo" class="auth-logo">
-                <h2>Passenger Login</h2>
-                <form id="loginForm">
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button type="submit" class="auth-btn">Sign In</button>
-                </form>
-                <p>New Traveler? <a href="#" onclick="showSignUp()">Create Account</a></p>
-            </div>
-    
-            
-    <div id="signupSection" style="display:none;">
-                <img src="images/Logo.jpg" alt="The Train Café Logo" class="auth-logo">
-                <h2>Join the Journey</h2>
-                <form id="signupForm">
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Create Password" required>
-                    <button type="submit" class="auth-btn">Register</button>
-                </form>
-                <p>Already have an account? <a href="#" onclick="showLogin()">Sign In</a></p>
-            </div>
-        </div>
-    </div>
 
-    <script src="auth.js"></script>
-
-</body>
-</html>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function openModal() { document.getElementById('signinModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function closeModal() { document.getElementById('signinModal').classList.remove('open'); document.body.style.overflow = ''; }
+        document.getElementById('signinModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+        function switchTab(id, btn) {
+            document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.modal-tab').forEach(b => b.classList.remove('active'));
+            document.getElementById('auth-' + id).classList.add('active');
+            btn.classList.add('active');
+        }
+        // ── Cognito stubs — replace with your Hosted UI URL ──
+        // To use Cognito Hosted UI: window.location.href = 'https://YOUR-DOMAIN.auth.REGION.amazoncognito.com/login?...'
+        function handleSignIn() {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-password').value;
+            if (!email || !pass) { alert('Please enter your email and password.'); return; }
+            // TODO: window.location.href = 'YOUR-COGNITO-HOSTED-UI-URL';
+            alert('Connected to AWS Cognito. Paste your Hosted UI URL to activate.');
+        }
+        function handleRegister() {
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pass = document.getElementById('reg-password').value;
+            if (!name || !email || !pass) { alert('Please fi
