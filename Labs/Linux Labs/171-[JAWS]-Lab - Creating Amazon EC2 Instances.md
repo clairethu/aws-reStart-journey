@@ -92,6 +92,16 @@ I provisioned a Bastion Host to serve as a secure gateway for a VPC. To harden t
 
 > **Transformation Insight:** Connectivity requires a "Double-Green" status: The **Security Group** must permit the traffic (Network), and the **Service** must be listening for the request (Application).
 
-* ![Bastion Host CLI](./images/working_apache_server.png)
+* ![Web App Successfully Running](./images/working_apache_server.png)
 
-* 
+## 🔍 Task: Programmatic Metadata Retrieval
+**Action:** Used the AWS CLI to retrieve the Public IPv4 DNS of the Web Server.
+
+### ⚙️ Technical Execution:
+- **Command:** `aws ec2 describe-instances`
+- **Logic:** Applied a **Filter** for the instance Name and a **Query** to isolate the DNS string.
+- **Result:** Successfully identified the public endpoint for browser-based verification.
+
+> **Transformation Insight:** Relying on the CLI for information retrieval is a key step toward **Infrastructure Automation**. It allows scripts to find and use resources dynamically without human intervention.
+
+* ![Claire's reStart Project](./images/lab172_claire_restart_prj.png)
