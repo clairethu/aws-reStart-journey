@@ -43,3 +43,19 @@ Instead of terminating the instance, I performed a **live modification**:
 * **Remediation:** The process of correcting a configuration error or security vulnerability.
 
 * ![Bastion Host Launch Confirmation](./images/task1-result.png)
+
+## 🎤 The "Power Pitch"
+I provisioned a Bastion Host to serve as a secure gateway for a VPC. To harden the environment, I configured a Security Group to restrict traffic to Port 22 and attached a granular IAM Role for secure service-level permissions. When I identified a missing profile post-launch, I performed a live remediation to update the instance identity without causing downtime.
+
+## 🔌 Task 2: Establishing Secure Connectivity
+**Date:** 22 March 2026
+**Action:** Accessed the Bastion Host via EC2 Instance Connect.
+
+### 🔑 Technical Execution:
+- **Method:** Browser-based SSH (EC2 Instance Connect).
+- **Security Logic:** Utilized IAM-based authentication to eliminate the need for long-lived SSH private keys (.pem files).
+- **Verification:** Successfully reached the Linux terminal (`sh-4.2$`) to begin programmatic administration.
+
+> **Transformation Insight:** Using **EC2 Instance Connect** is a major security upgrade for a team. It allows us to audit exactly "who" logged in via AWS CloudTrail, providing a much better paper trail than sharing a single SSH key among multiple engineers.
+
+* ![Bastion Host CLI](./images/bastion_host_CLI.png)
