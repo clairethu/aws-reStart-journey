@@ -1,11 +1,11 @@
-# 🚂 The Train Café — AWS Deployment Project
+# The Train Café — AWS Deployment Project
 
 > *A café between destinations* — Static website deployed on AWS  
 > **Est.** 2026 · Zurich
 
 ---
 
-## 📋 Project Overview
+## Project Overview
 
 The Train Café is a fully deployed static restaurant website built and hosted on AWS.  
 Customers can browse the menu, reserve a table, and place orders online.  
@@ -13,7 +13,7 @@ User authentication is handled by AWS Cognito, and all bookings and orders are s
 
 ---
 
-## 🗂️ File Structure
+## File Structure
 
 ```
 train-cafe-website/
@@ -42,7 +42,7 @@ train-cafe-website/
 
 ---
 
-## 🌐 Live Website
+## Live Website
 
 **S3 Endpoint (HTTP):**
 `http://the-train-cafe-website.s3-website-us-east-1.amazonaws.com`
@@ -69,7 +69,7 @@ train-cafe-website/
 
 ---
 
-## 🚀 Deployment Phases
+## Deployment Phases
 
 ### ✅ Phase 1 — S3 Static Website Hosting
 
@@ -191,7 +191,7 @@ iam:CreateRole not authorized
 
 ---
 
-## 👥 Team
+## Team
 
 | Member | Role | Contribution |
 |---|---|---|
@@ -204,7 +204,7 @@ iam:CreateRole not authorized
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 | Status | Screenshot | Phase | What it shows |
 |---|---|---|---|
