@@ -42,3 +42,15 @@ In this lab, I moved from simple resource management to full-stack Infrastructur
 | **Gateway** | `Internet Gateway (IGW)` | Provides the "Default Route" for internet-bound traffic. |
 
 > **Transformation Insight:** Using the "VPC and more" wizard demonstrates **Operational Excellence**. It ensures that the **Route Tables** are correctly associated with the **Subnets** automatically, reducing the risk of a "Silent Failure" where a server has a public IP but no path to the internet.
+
+## 🔍 Task: Programmatic Metadata Retrieval
+**Action:** Used the AWS CLI to retrieve the Public IPv4 DNS of the Web Server.
+
+### ⚙️ Technical Execution:
+- **Command:** `aws ec2 describe-instances`
+- **Logic:** Applied a **Filter** for the instance Name and a **Query** to isolate the DNS string.
+- **Result:** Successfully identified the public endpoint for browser-based verification.
+
+> **Transformation Insight:** Relying on the CLI for information retrieval is a key step toward **Infrastructure Automation**. It allows scripts to find and use resources dynamically without human intervention.
+
+* ![Claire's reStart Project](./images/lab172_claire_restart_prj.png)
