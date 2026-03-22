@@ -56,6 +56,30 @@ I provisioned a Bastion Host to serve as a secure gateway for a VPC. To harden t
 - **Security Logic:** Utilized IAM-based authentication to eliminate the need for long-lived SSH private keys (.pem files).
 - **Verification:** Successfully reached the Linux terminal (`sh-4.2$`) to begin programmatic administration.
 
-> **Transformation Insight:** Using **EC2 Instance Connect** is a major security upgrade for a team. It allows us to audit exactly "who" logged in via AWS CloudTrail, providing a much better paper trail than sharing a single SSH key among multiple engineers.
-
 * ![Bastion Host CLI](./images/bastion_host_CLI.png)
+
+# 🤖 Task 3: Programmatic Infrastructure Deployment
+**Focus:** Launching a Web Server via AWS CLI using dynamic variables.
+
+### ⚙️ Automation Logic:
+1. **Dynamic ID Retrieval:** Used `ssm get-parameters` to fetch the latest AMI, ensuring the OS is always up-to-date.
+2. **Environment Variables:** Stored IDs (Subnet, SG, AMI) in variables to make the final `run-instances` command clean and reusable.
+3. **Bootstrapping:** Attached a `UserData.txt` script to automate the installation of the Apache Web Server upon boot.
+
+> **Transformation Insight:** This task demonstrates the power of **Infrastructure as Code (IaC)** principles. By using scripts instead of the Management Console, I eliminated the risk of "human error" (like typos) and ensured the deployment is repeatable and scalable.
+
+* ![Bastion Host CLI](./images/working_webserver.png)
+
+## 🛠️ Challenge 1: Remediation of a Misconfigured Security Group
+**Issue:** The "Misconfigured Web Server" was unreachable via SSH because Port 22 was missing from the Inbound Rules.
+
+### 🔧 Corrective Action:
+- **Security Group:** `Challenge-SG`
+- **Rule Added:** SSH (Port 22) | Protocol: TCP | Source: 0.0.0.0/0
+- **Result:** Established a "Maintenance Path" to the server while keeping the Web Path (Port 80) active.
+
+> **Transformation Insight:** A Security Group acts as a "Default Deny" firewall. If a port isn't explicitly listed, the traffic is dropped. Fixing this via the console is a common **remediation** task when initial deployment scripts miss a requirement.
+
+* ![Bastion Host CLI](./images/working_misconfigured_server.png)
+
+* 
