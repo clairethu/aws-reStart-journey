@@ -82,4 +82,16 @@ I provisioned a Bastion Host to serve as a secure gateway for a VPC. To harden t
 
 * ![Bastion Host CLI](./images/working_misconfigured_server.png)
 
+# 🛠️ Challenge 2 : Fix the web server installation
+**Issue:** Browser cannot reach the Public DNS of the Web Server.
+
+### 🔧 Remediation Process:
+1. **Security Group Update:** Identified that **Port 80 (HTTP)** was not authorized. Added an inbound rule to allow public web traffic.
+2. **Service Verification:** Accessed the instance via SSH and found the **Apache (httpd)** service was not initialized. 
+3. **Execution:** Ran `sudo systemctl start httpd` to activate the web server.
+
+> **Transformation Insight:** Connectivity requires a "Double-Green" status: The **Security Group** must permit the traffic (Network), and the **Service** must be listening for the request (Application).
+
+* ![Bastion Host CLI](./images/working_apache_server.png)
+
 * 
