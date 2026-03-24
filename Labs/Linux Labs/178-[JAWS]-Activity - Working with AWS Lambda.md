@@ -77,12 +77,24 @@ Successfully created the function salesAnalysisReportDataExtractor.
 Successfully created the layer to function.
 ![Report Workflow](./images/added_layer.png)
 
-### Step 7 :Imported Data Extractor Logic
+### Step 7 :Imported Python Code to extract data
 **Action:** Uploaded the core application code and configured the execution entry point.
 
 **Handler:** `salesAnalysisReportDataExtractor.lambda_handler`   
 **Artifact:** `salesAnalysisReportDataExtractor-v3.zip`
+**Purpose:** To enable dynamic, secure data extraction. By receiving database credentials (dbURL, dbName, dbUser, and dbPassword) via the event parameter, the function avoids the security risk of hardcoding secrets. This "Event-Driven" design ensures the function is reusable across different database environments (e.g., Test vs. Production).   
+![Report Workflow](./images/imported_code.png)
 
+### Step 7 : Configured Network Connectivity
+**Action:** Provisioned a virtual network bridge to allow the serverless function to access the private database environment.   
+**VPC:** `Cafe VPC`   
+**Subnet:** `Cafe Public Subnet 1`   
+**Security Group:** `CafeSecurityGroup`   
+
+**Purpose:** To establish a secure connection between the Lambda function and the MariaDB instance. By "plugging" the function into the VPC, AWS creates an Elastic Network Interface (ENI) that allows the code to bypass the public internet and query the database directly over the internal network
+
+> **[!Note]**
+> **Infrastructure Note:** The networking components (VPC, Subnets, and Security Groups) utilized in this task were **pre-provisioned** by the lab environment. This simulates a real-world enterprise scenario where the "Cloud Operations" team manages the core network security, allowing the "Serverless Developer" to focus strictly on application logic and code deployment.
 
 ## 📓 Lab Observations & Troubleshooting
 
