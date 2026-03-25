@@ -210,6 +210,15 @@ Successfully created the layer to function.
 * **Key:** `topicARN`
 * **Value:** `[SNS Topic ARN]`
 * **Purpose:** To implement **Configuration Externalization**. Line 26 of the Python script is hardcoded to look for a variable named `topicARN`. By providing this value in the Lambda settings rather than the code itself, we ensure the function remains modular and easy to update without redeploying the source code.
+
+### **Step 5. Final Orchestration & Email Validation**
+**Action:** Executed a manual unit test using a `SARTestEvent` to trigger the complete reporting pipeline.
+
+* **Test Result:** `Execution result: succeeded`
+* **Response:** `{"statusCode": 200, "body": "Sale Analysis Report sent."}`
+* **Final Outcome:** Successfully received the "Daily Sales Analysis Report" email containing real-time data from the MariaDB instance.
+* **Purpose:** To verify the **End-to-End (E2E) Workflow**. This confirms that the Orchestrator successfully invokes the Data Extractor, processes the relational data, and delivers the final report via the SNS messaging hub.
+* * ![Report Workflow](./images/received_email.png)
 ---
 
 ## Lab Observations & Troubleshooting
