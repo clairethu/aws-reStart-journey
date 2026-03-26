@@ -219,17 +219,36 @@ Successfully created the layer to function.
 * **Final Outcome:** Successfully received the "Daily Sales Analysis Report" email containing real-time data from the MariaDB instance.
 * **Purpose:** To verify the **End-to-End (E2E) Workflow**. This confirms that the Orchestrator successfully invokes the Data Extractor, processes the relational data, and delivers the final report via the SNS messaging hub.
 * * ![Report Workflow](./images/received_email.png)
+ 
+### **Task 6. Automating the Reporting Pipeline**
+**Action:** Configured an **Amazon EventBridge (CloudWatch Events)** trigger to automate the execution of the `salesAnalysisReport` function.
+
+* **Trigger Type:** Schedule Expression (Cron)
+* **Rule Name:** `salesAnalysisReportDailyTrigger`
+* **Schedule:** `cron(0 20 ? * MON-SAT *)` (Configured for 8 PM UTC, Monday through Saturday).
+* **Purpose:** To transition from manual invocation to **Scheduled Automation**. This ensures that stakeholders receive the Sales Analysis Report consistently without human intervention, transforming the project into a true "hands-off" production pipeline.
 ---
 
-## Lab Observations & Troubleshooting
+### **Documentation Standard & ID Schema**
+All entries in this log follow a standardized naming convention: **[Type][Lab ID]-[Sequence]**.
+
+* **Prefix (Type):**
+    * **O (Reservation):** Strategic notes or observations regarding the architecture and environment behavior.
+    * **I (Issue):** Active blockers, bugs, or configuration errors encountered during deployment.
+* **Lab ID (178):** The project identifier.
+* **Sequence (01-08):** The chronological order of events.
+
+## Lab Observations & Issue List
 
 The following table documents deviations from the lab manual, technical hurdles, and key architectural notes identified during the deployment.
 
 | ID | Category | Observation / Issue | Resolution / Note |
 | :--- | :--- | :--- | :--- |
-| **178-01** | **Runtime** | The lab manual specified **Python 3.9**, but the version is deprecated/EOL (End of Life) in the 2026 console. | **Migrated to Python 3.14** for both the Lambda Layer and the Function to ensure modern support and security. |
-| **178-02** | **Database Engine** | Lab manual references **MySQL**, but the backend EC2 instance is actually running **MariaDB**. | Confirmed MariaDB as a "drop-in replacement." Since it is binary-compatible with MySQL, it uses the same **Port 3306** and the **PyMySQL** driver without requiring code changes. |
-| **178-03** | **Deployment** |	Received `Runtime.ImportModuleError.`	Artifact Sync Issue. | Verified that the .zip file was missing from the runtime. Re-uploaded and confirmed the Handler path was valid. |
-| **178-04** | **Input Validation** | Encountered `Error 2003 due to unreplaced placeholder text.` | Data Correction. Swapped manual template strings for actual SSM Parameter values. Confirmed that the "Event" object must contain literal values, not instructions. |
-| **O178-05** | **Timeout Settings** |	The function timed out at exactly 3.0 seconds, which is shorter than the database driver's connection threshold. |	Identified as the AWS Default Timeout for new functions. While this confirms the network is blocked (Security Group), it also highlights the need to increase the timeout (e.g., 15s) in production to account for VPC Cold Starts and database latency. |
-| **O178-06** | **Architecture** | Identified the requirement for two distinct ARN types. | **Dual ARN Mapping.** Used the **IAM Role ARN** to define "Permissions" (Identity) and the **SNS Topic ARN** to define "Destination" (Endpoint). This separation ensures the function is both authorized and correctly directed. |
+| **O178-01** | **Runtime** | Specified Python 3.9 is deprecated in the 2026 console. | **Migrated to Python 3.14** to ensure modern support and security. |
+| **O178-02** | **Database** | EC2 instance runs **MariaDB**, not standard MySQL. | Confirmed MariaDB as a "drop-in replacement" using **Port 3306**. |
+| **I178-03** | **Deployment** | Received `Runtime.ImportModuleError`. | **Artifact Sync.** Re-uploaded the .zip file and verified the Handler path. |
+| **I178-04** | **Validation** | `Error 2003` due to unreplaced placeholder text. | **Data Correction.** Swapped manual strings for actual SSM Parameter values. |
+| **O178-05** | **Timeout** | Function timed out at exactly 3.0s (AWS Default). | **Performance Tuning.** Increased timeout to 15s to account for Cold Starts. |
+| **O178-06** | **Architecture** | Requirement for two distinct ARN types. | **Dual ARN Mapping.** Used IAM Role ARN for Identity and SNS ARN for Destination. |
+| **I178-07** | **Security** | Connection blocked by VPC firewall (Port 3306). | **Firewall Update.** Authorized the Lambda Security Group in the Inbound Rules. |
+| **O178-08** | **Automation** | Implemented a Cron-based schedule (EventBridge). | **Serverless Scheduling.** Configured the report for 8 PM UTC (Mon-Sat). |
