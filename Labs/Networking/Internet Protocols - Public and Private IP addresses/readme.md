@@ -11,7 +11,7 @@ Client (Jess) has two EC2s in the same VPC (`10.0.0.0/16`). **Instance B** works
 
 Client's Architecture
 
-* ![Bastion Host CLI](./images/lab172_working_web_app.png)
+* ![Bastion Host CLI](./vpc1.png)
 
 ### 🕵️ Observations & Hypotheses
 
