@@ -9,21 +9,32 @@
 ### Case Summary
 Client (Jess) has two EC2s in the same VPC (`10.0.0.0/16`). **Instance B** works fine, but **Instance A** has zero internet access. Also, client is asking about using `12.0.0.0/16` for a new VPC.
 
-Client's Architecture
+**Client's Architecture**
 
-* ![Bastion Host CLI](./vpc1.png)
+![Client Architecture](./images/vpc1.png)
 
-### 🕵️ Observations & Hypotheses
+### Resource Inventory & IP Discovery
 
-| ID | Issue | Hypothesis / Note |
-| :--- | :--- | :--- |
-| **I-01** | Instance A Connectivity | Missing Public/Elastic IP. Subnet routing is likely fine since B works. |
-| **I-02** | Custom CIDR (`12.x.x.x`) | Bad idea. This is public space (AT&T). Will cause routing "black holes." |
+| Instance | Private IPv4 Address | Public IPv4 Address | Connectivity Status |
+| :--- | :--- | :--- | :--- |
+| **Instance A** | `10.0.10.163` | **None** | ❌ No Internet Access |
+| **Instance B** | `10.0.10.170` | `35.166.234.229` | ✅ Internet Access Active |
 
-### 🛠 Action Plan
-1. **Check IPs:** Verify if Instance A only has a private IP. If so, associate an Elastic IP.
-2. **Review IGW:** Confirm the Internet Gateway is attached to the VPC.
-3. **Advice:** Tell Jess to stick to **RFC 1918** (e.g., `172.16.x.x`) to avoid overlapping with the real internet.
+#### Root Cause Analysis
+* **Instance B:** Accessible because it has a **Public IPv4 address** (`35.166.234.229`). This allows the VPC's Internet Gateway to route external traffic to the instance.
+* **Instance A:** Inaccessible because it has **No Public IPv4 address**. In AWS, a public subnet requires an instance to have a public identity to communicate beyond the VPC.
+
+### Resolution: Enabling Internet Access for Instance A
+
+**Solution:** Allocated and associated an Amazon Elastic IP (EIP).
+
+
+#### Steps Taken
+1.  Navigated to **EC2 > Network & Security > Elastic IPs**.
+2.  Allocated a new IPv4 address from Amazon's pool.
+3.  Associated the address with the Network Interface (ENI) of **Instance A**.
+4.  Verified connectivity by pinging `8.8.8.8` from the instance command line.  
+
 
 ---
 *End of log.*
