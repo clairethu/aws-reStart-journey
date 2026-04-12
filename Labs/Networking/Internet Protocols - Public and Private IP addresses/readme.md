@@ -33,8 +33,19 @@ Client (Jess) has two EC2s in the same VPC (`10.0.0.0/16`). **Instance B** works
 1.  Navigated to **EC2 > Network & Security > Elastic IPs**.
 2.  Allocated a new IPv4 address from Amazon's pool.
 3.  Associated the address with the Network Interface (ENI) of **Instance A**.
-4.  Verified connectivity by pinging `8.8.8.8` from the instance command line.  
+4.  Verified connectivity by pinging `8.8.8.8` from the instance command line.
 
+#### Advice regarding to IP range for new VPC
+Advised client against using 12.0.0.0/16. Since this is public space owned by AT&T, it creates a routing conflict. The VPC will prioritize this as a 'local' route, making the actual AT&T services on the internet unreachable for these instances.
+
+
+#### Verification Workflow
+To avoid this in the future, always perform a WHOIS lookup to verify if a range is "Private" or "Public" before deployment. 
+
+**Terminal Command:**
+```bash
+# Use the full path if 'whois' is not in your standard shell PATH
+/usr/bin/whois 12.0.0.0
 
 ---
 *End of log.*
