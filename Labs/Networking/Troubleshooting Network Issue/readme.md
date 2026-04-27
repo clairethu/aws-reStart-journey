@@ -29,7 +29,7 @@ A customer reported a failure to connect to an Apache web server. The server was
 
 Before troubleshooting the network layers, the server software status is verified via **SSH**.
 
-![SSH Connect](./images/ssh_connect.png)
+![SSH Connect](./Images/ssh_connect.png)
 
 #### **Technical Configuration**
 | Command | Result | Action |
