@@ -1,7 +1,7 @@
 # Project: Troubleshooting a Network Connectivity Issue
 
 ## Overview
-This project demonstrates the systematic process of identifying and resolving network "blockers" within an **Amazon Web Services (AWS)** environment. It focuses on diagnosing why a web server (Apache) is unreachable via the internet and `ping` (ICMP) requests, despite the instance being active[cite: 15, 16, 159].
+This project demonstrates the systematic process of identifying and resolving network "blockers" within an **Amazon Web Services (AWS)** environment. It focuses on diagnosing why a web server (Apache) is unreachable via the internet and `ping` (ICMP) requests, despite the instance being active.
 
 ---
 
@@ -75,4 +75,3 @@ After modifying the necessary security and routing rules, the connection is veri
 
 [← Back to Certifications & Badges](../../)
 
-[← Back to Main Portfolio](../../)
