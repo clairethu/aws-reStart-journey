@@ -58,7 +58,9 @@ To stay organized, the project doesn't just update everything at once. It uses *
 
 ![patching](./images/patching.jpg)
 
+* **Visual Confirmation:** The **Scan/Install operation summary** chart is now entirely green, indicating a 100% success rate for the operation.
 
+![success patch](./images/success_patched.jpg)
 
 ---
 
