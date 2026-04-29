@@ -124,6 +124,8 @@ To automate updates across a large environment, servers must be "labeled" so the
 * **Precision Targeting:** Using tags allows the business to scale to thousands of servers while maintaining 100% accuracy in which updates are sent to which department.
 * **Automated Logging:** The system generates a detailed **Output** log for every instance, providing an unalterable record of the update process.
 
+![Paching_Status](./images/patching_status.png)
+
 ---
 
 ## **Phase 4: Final Audit & Compliance Verification**
