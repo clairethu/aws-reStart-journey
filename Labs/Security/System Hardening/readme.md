@@ -117,12 +117,8 @@ To automate updates across a large environment, servers must be "labeled" so the
 
 
 * **Technical Orchestration:** Behind the scenes, Patch Manager uses the **Run Command** to execute the **RunPatchBaseline** document, which evaluates and installs the necessary patches.
+![Patch_In Progress](./images/patch_in_progress.png)
 
-
-!(patch_in_progress.png)
-![Image showing individual instances in the "Pending" and "InProgress" status during patching](patching_status.png)
-!(patch_success.jpg)
-![Image showing the detailed technical log confirming the correct PatchGroup and BaselineID were used](patch_success_output.jpg)
 
 ### **The Business Logic (Why this matters):**
 * **Precision Targeting:** Using tags allows the business to scale to thousands of servers while maintaining 100% accuracy in which updates are sent to which department.
@@ -138,7 +134,7 @@ The project concludes by verifying that every server in the organization meets t
 * **Fleet-Wide Verification:** The **Compliance Reporting** dashboard confirmed that all 6 servers (3 Linux and 3 Windows) reached a status of **Compliant**.
 * **Deep-Dive Audit:** The system allows for a review of specific patches applied to each node, including the exact installation time.
 
-!(all_success_patch.jpg)
+![All Success Patch](./images/all_success_patch.png)
 
 ### **The Business Logic (The Final Result):**
 * **100% Visibility:** Management has a single, real-time view confirming the entire infrastructure is healthy.
